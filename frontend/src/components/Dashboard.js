@@ -135,14 +135,22 @@ const Dashboard = () => {
       const [contagemRes, somaRes, quantidadeRes] = await Promise.all([
         axios.get("http://localhost:3307/contagem"),
         axios.get("http://localhost:3307/produtos/soma-precos-disponiveis"),
-        axios.get("http://localhost:3307/produtos/quantidade-total") // Endpoint para a quantidade total de produtos
+        axios.get("http://localhost:3307/produtos/quantidade-total"), // Endpoint para a quantidade total de produtos
       ]);
-
-      setDisponiveis(contagemRes.data.disponiveis);
-      setIndisponiveis(contagemRes.data.indisponiveis);
-      setSomaPrecos(somaRes.data.totalPrecos);
-      setTotalQuantidade(quantidadeRes.data.totalQuantidade); // Setando a quantidade total
+  
+      // Log das respostas da API
+      console.log("Resposta da API:", {
+        contagem: contagemRes.data,
+        somaPrecos: somaRes.data,
+        totalQuantidade: quantidadeRes.data,
+      });
+  
+      setDisponiveis(contagemRes.data.disponiveis ?? 0);
+      setIndisponiveis(contagemRes.data.indisponiveis ?? 0);
+      setSomaPrecos(somaRes.data.totalPrecos ?? 0);
+      setTotalQuantidade(quantidadeRes.data.totalQuantidades ?? 0); // Corrigido para o nome correto
     } catch (error) {
+      console.error("Erro ao buscar dados:", error);
       setError(true);
     } finally {
       setLoading(false);
@@ -206,16 +214,16 @@ const Dashboard = () => {
               </StatCard>
 
               <StatCard style={{ backgroundColor: "#cfe8fc" }}> {/* Azul suave */}
-                <IconTextContainer>
-                  <FaCheckCircle size={30} color="#2196F3" />
-                  <h3>Quantidade Total de Produtos</h3>
-                </IconTextContainer>
-                <StatNumber>
-                  {totalQuantidade !== null
-                    ? `${totalQuantidade}` // Exibe a quantidade total de produtos
-                    : "Dados não disponíveis"}
-                </StatNumber>
-              </StatCard>
+  <IconTextContainer>
+    <FaCheckCircle size={30} color="#2196F3" />
+    <h3>Quantidade Total de Produtos</h3>
+  </IconTextContainer>
+  <StatNumber>
+    {totalQuantidade !== null && totalQuantidade !== undefined 
+      ? `${totalQuantidade}` // Exibe a quantidade total de produtos
+      : "Dados não disponíveis"}
+  </StatNumber>
+</StatCard>
 
             </StatCardsContainer>
           )}
