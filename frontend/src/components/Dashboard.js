@@ -59,10 +59,10 @@ const StatCardsContainer = styled.div`
   margin-top: 20px;
 `;
 
-// Estilo dos cards
 const StatCard = styled.div`
   flex: 1;
   min-width: 250px;
+  max-width: 320px;  /* Define o tamanho máximo do card */
   padding: 25px;
   background-color: ${(props) => (props.available ? "#d1f7c4" : "#f7c4c4")};
   border-radius: 8px;
@@ -137,14 +137,14 @@ const Dashboard = () => {
         axios.get("http://localhost:3307/produtos/soma-precos-disponiveis"),
         axios.get("http://localhost:3307/produtos/quantidade-total"), // Endpoint para a quantidade total de produtos
       ]);
-  
+
       // Log das respostas da API
       console.log("Resposta da API:", {
         contagem: contagemRes.data,
         somaPrecos: somaRes.data,
         totalQuantidade: quantidadeRes.data,
       });
-  
+
       setDisponiveis(contagemRes.data.disponiveis ?? 0);
       setIndisponiveis(contagemRes.data.indisponiveis ?? 0);
       setSomaPrecos(somaRes.data.totalPrecos ?? 0);
@@ -213,17 +213,17 @@ const Dashboard = () => {
                 </StatNumber>
               </StatCard>
 
-              <StatCard style={{ backgroundColor: "#cfe8fc" }}> {/* Azul suave */}
-  <IconTextContainer>
-    <FaCheckCircle size={30} color="#2196F3" />
-    <h3>Quantidade Total de Produtos</h3>
-  </IconTextContainer>
-  <StatNumber>
-    {totalQuantidade !== null && totalQuantidade !== undefined 
-      ? `${totalQuantidade}` // Exibe a quantidade total de produtos
-      : "Dados não disponíveis"}
-  </StatNumber>
-</StatCard>
+              <StatCard style={{ backgroundColor: "#cfe8fc" }}> {/* Azul suave e com flex menor */}
+                <IconTextContainer>
+                  <FaCheckCircle size={30} color="#2196F3" />
+                  <h3>Total de Produtos</h3>
+                </IconTextContainer>
+                <StatNumber>
+                  {totalQuantidade !== null && totalQuantidade !== undefined
+                    ? `${totalQuantidade}` // Exibe a quantidade total de produtos
+                    : "Dados não disponíveis"}
+                </StatNumber>
+              </StatCard>
 
             </StatCardsContainer>
           )}
