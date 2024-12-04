@@ -6,8 +6,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../img/Logo.png";
 
-
-// Componentes estilizados
 const Container = styled.div`
   display: flex;
   align-items: center;
@@ -120,13 +118,12 @@ const LoginPage = () => {
     try {
       const res = await axios.post("http://localhost:3307/login", { email, senha });
       
-      // Logando a resposta para verificar os dados retornados pela API
-      console.log(res.data);  // Verifique o que está sendo retornado pelo servidor
+      console.log(res.data);  
   
       if (res.data.token && res.data.role) {
         const { token, role } = res.data;
         localStorage.setItem("token", token);
-        localStorage.setItem("role", role); // Salvar a role também
+        localStorage.setItem("role", role); 
         toast.success("Login realizado com sucesso!");
         navigate("/dashboard");
         setTimeout(() => {

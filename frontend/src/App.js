@@ -13,8 +13,6 @@ import { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
-
-// Import React Router
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const Content = styled.div`
@@ -24,7 +22,7 @@ const Content = styled.div`
   align-items: center;
 `;
 
-// Componente de Rota Protegida
+
 const PrivateRoute = ({ isAuthenticated, children }) => {
   return isAuthenticated ? children : <Navigate to="/login" />;
 };
@@ -37,13 +35,12 @@ function App() {
   const [role, setRole] = useState(null);
 
   useEffect(() => {
-    // Verifica se o token está presente no localStorage
     const token = localStorage.getItem("token");
-    const storedRole = localStorage.getItem("role"); // Recupera o papel do usuário
+    const storedRole = localStorage.getItem("role");
 
     if (token && storedRole) {
-      setIsAuthenticated(true); // Se o token estiver presente, o usuário está autenticado
-      setRole(storedRole); // Define o papel do usuário (por exemplo, 'admin')
+      setIsAuthenticated(true);
+      setRole(storedRole);
     }
   }, []);
 
@@ -76,20 +73,18 @@ function App() {
   return (
     <Router>
       <div style={{ display: "flex", height: "100vh" }}>
-        {/* Renderiza a Sidebar apenas se o usuário estiver autenticado */}
+
         {isAuthenticated && <Sidebar />}
 
-        {/* Conteúdo Principal */}
         <Content>
-          {/* Definindo as Rotas */}
+
           <Routes>
-            {/* Rota de Inicio */}
+
             <Route
               path="/"
               element={isAuthenticated ? <Navigate to="/dashboard" /> : <Navigate to="/login" />}
             />
 
-            {/* Rota da Dashboard */}
             <Route
               path="/dashboard"
               element={
@@ -99,7 +94,6 @@ function App() {
               }
             />
 
-            {/* Rota de Entradas com a lista de produtos */}
             <Route
               path="/entradas"
               element={
@@ -109,7 +103,6 @@ function App() {
               }
             />
 
-            {/* Rota de Saídas com a lista de exclusões */}
             <Route
               path="/saidas"
               element={
@@ -119,7 +112,6 @@ function App() {
               }
             />
 
-            {/* Rota da Página de Formulário (Cadastro de Produtos) */}
             <Route
               path="/estoque"
               element={
@@ -130,13 +122,11 @@ function App() {
               }
             />
 
-            {/* Rota de Login */}
             <Route
               path="/login"
               element={isAuthenticated ? <Navigate to="/dashboard" /> : <Login setIsAuthenticated={setIsAuthenticated} />}
             />
 
-            {/* Rota de Registro (Somente para Administradores) */}
             <Route
               path="/register"
               element={

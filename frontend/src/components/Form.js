@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { FaPlus } from "react-icons/fa";
 import Dropdown from "../components/Dropdown";
 
-// Overlay com efeito suave
+
 const Overlay = styled.div`
   position: fixed;
   top: 0;
@@ -21,7 +21,7 @@ const Overlay = styled.div`
   transition: opacity 0.3s ease-in-out;
 `;
 
-// Navbar com novo design e sombra sutil
+
 const Navbar = styled.nav`
   width: 90vw;
   position: relative;

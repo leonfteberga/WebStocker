@@ -5,13 +5,12 @@ import { FaCheckCircle, FaTimesCircle, FaUser, FaSignOutAlt } from "react-icons/
 import { useNavigate } from "react-router-dom";
 import Dropdown from "../components/Dropdown";
 
-// Estilização para a barra de navegação
 const Navbar = styled.nav`
   width: 90vw;
   position: relative;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #4c4b72; // Cor mais suave
+  background-color: #4c4b72; 
   padding: 30px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
   text-align: left;
@@ -22,7 +21,7 @@ const Navbar = styled.nav`
   margin-bottom: 20px;
 `;
 
-// Container geral para centralizar o Dashboard na página
+
 const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -32,7 +31,7 @@ const PageContainer = styled.div`
   padding-top: 60px;
 `;
 
-// Container para o conteúdo do dashboard
+
 const DashboardContainer = styled.div`
   width: 100%;
   max-width: 1200px;
@@ -50,7 +49,7 @@ const DashboardContainer = styled.div`
   }
 `;
 
-// Container para os cards de estatísticas
+
 const StatCardsContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -62,7 +61,7 @@ const StatCardsContainer = styled.div`
 const StatCard = styled.div`
   flex: 1;
   min-width: 250px;
-  max-width: 320px;  /* Define o tamanho máximo do card */
+  max-width: 320px;  
   padding: 25px;
   background-color: ${(props) => (props.available ? "#d1f7c4" : "#f7c4c4")};
   border-radius: 8px;
@@ -76,7 +75,7 @@ const StatCard = styled.div`
   }
 `;
 
-// Estilo para o ícone e o texto do card
+
 const IconTextContainer = styled.div`
   display: flex;
   align-items: center;
@@ -86,7 +85,6 @@ const IconTextContainer = styled.div`
   margin-bottom: 10px;
 `;
 
-// Estilo para o número dos produtos
 const StatNumber = styled.p`
   font-size: 1.4em;
   font-weight: bold;
@@ -124,7 +122,7 @@ const Dashboard = () => {
   const [disponiveis, setDisponiveis] = useState(null);
   const [indisponiveis, setIndisponiveis] = useState(null);
   const [somaPrecos, setSomaPrecos] = useState(null);
-  const [totalQuantidade, setTotalQuantidade] = useState(null); // Novo estado para a quantidade total de produtos
+  const [totalQuantidade, setTotalQuantidade] = useState(null); 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -135,7 +133,7 @@ const Dashboard = () => {
       const [contagemRes, somaRes, quantidadeRes] = await Promise.all([
         axios.get("http://localhost:3307/contagem"),
         axios.get("http://localhost:3307/produtos/soma-precos-disponiveis"),
-        axios.get("http://localhost:3307/produtos/quantidade-total"), // Endpoint para a quantidade total de produtos
+        axios.get("http://localhost:3307/produtos/quantidade-total"), 
       ]);
 
       // Log das respostas da API
@@ -148,7 +146,7 @@ const Dashboard = () => {
       setDisponiveis(contagemRes.data.disponiveis ?? 0);
       setIndisponiveis(contagemRes.data.indisponiveis ?? 0);
       setSomaPrecos(somaRes.data.totalPrecos ?? 0);
-      setTotalQuantidade(quantidadeRes.data.totalQuantidades ?? 0); // Corrigido para o nome correto
+      setTotalQuantidade(quantidadeRes.data.totalQuantidades ?? 0); 
     } catch (error) {
       console.error("Erro ao buscar dados:", error);
       setError(true);
@@ -213,14 +211,14 @@ const Dashboard = () => {
                 </StatNumber>
               </StatCard>
 
-              <StatCard style={{ backgroundColor: "#cfe8fc" }}> {/* Azul suave e com flex menor */}
+              <StatCard style={{ backgroundColor: "#cfe8fc" }}> 
                 <IconTextContainer>
                   <FaCheckCircle size={30} color="#2196F3" />
                   <h3>Total de Produtos</h3>
                 </IconTextContainer>
                 <StatNumber>
                   {totalQuantidade !== null && totalQuantidade !== undefined
-                    ? `${totalQuantidade}` // Exibe a quantidade total de produtos
+                    ? `${totalQuantidade}` 
                     : "Dados não disponíveis"}
                 </StatNumber>
               </StatCard>

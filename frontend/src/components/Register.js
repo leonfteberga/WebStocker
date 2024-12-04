@@ -95,7 +95,6 @@ const Register = () => {
   const [loading, setLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Verifica autenticação e role do usuário
   const checkAuthentication = () => {
     const token = localStorage.getItem("token");
     const storedRole = localStorage.getItem("role");
@@ -125,13 +124,12 @@ const Register = () => {
       return;
     }
   
-    // Verifica se a senha atende aos critérios
     if (!validatePassword(senha)) {
       toast.warn("A senha deve ter no mínimo 8 caracteres, uma letra maiúscula, um número e um caractere especial.");
       return;
     }
   
-    setIsSubmitting(true); // Desativa o botão enquanto processa
+    setIsSubmitting(true); 
   
     try {
       const token = localStorage.getItem("token");
@@ -150,21 +148,18 @@ const Register = () => {
         err.response?.data?.error || err.response?.data?.message || "Erro ao cadastrar usuário.";
       toast.error(errorMessage);
     } finally {
-      setIsSubmitting(false); // Reativa o botão após conclusão
+      setIsSubmitting(false); 
     }
   };
 
-  // Tela de carregamento
   if (loading) {
     return <div>Carregando...</div>;
   }
 
-  // Redireciona para login se o usuário não estiver autenticado
   if (!isAuthenticated) {
     return <Navigate to="/login" />;
   }
 
-  // Redireciona para dashboard se não for administrador
   if (!isAdmin) {
     return <Navigate to="/dashboard" />;
   }

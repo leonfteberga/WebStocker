@@ -3,7 +3,7 @@ import axios from "axios";
 import styled from "styled-components";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import { toast } from "react-toastify";
-import SearchBar from "../components/SearchBar"; // Importa o componente SearchBar
+import SearchBar from "../components/SearchBar"; 
 
 const Table = styled.table`
   width: 100%;
@@ -59,7 +59,6 @@ const ActionButton = styled.button`
   }
 `;
 
-// Modal de confirmação de exclusão
 const ModalOverlay = styled.div`
   position: fixed;
   top: 0;
@@ -101,33 +100,30 @@ const Grid = ({ produtos, setProdutos, setOnEdit }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [sortBy, setSortBy] = useState("");
   const [sortDirection, setSortDirection] = useState("asc");
-  const [showModal, setShowModal] = useState(false);  // Estado para o modal
-  const [productToDelete, setProductToDelete] = useState(null);  // Produto selecionado para exclusão
+  const [showModal, setShowModal] = useState(false);
+  const [productToDelete, setProductToDelete] = useState(null);
 
   const handleEdit = (item) => {
     setOnEdit(item);
   };
 
-  // Abre o modal de confirmação de exclusão
   const openModal = (id) => {
     setProductToDelete(id);
     setShowModal(true);
   };
 
-  // Fecha o modal
   const closeModal = () => {
     setShowModal(false);
     setProductToDelete(null);
   };
 
-  // Função de exclusão do produto
   const handleDelete = async () => {
     try {
       const { data } = await axios.delete("http://localhost:3307/" + productToDelete);
       const newArray = produtos.filter((produto) => produto.id !== productToDelete);
       setProdutos(newArray);
       toast.success(data);
-      closeModal(); // Fecha o modal após exclusão
+      closeModal();
     } catch (error) {
       toast.error("Erro ao deletar o produto. Por favor, tente novamente.");
     }
@@ -139,7 +135,6 @@ const Grid = ({ produtos, setProdutos, setOnEdit }) => {
     return normalizeString(produto.nome).includes(normalizeString(searchTerm));
   });
 
-  // Função para ordenar os produtos
   const sortProdutos = (field) => {
     const sorted = [...filteredProdutos].sort((a, b) => {
       if (field === "nome") {
@@ -162,7 +157,6 @@ const Grid = ({ produtos, setProdutos, setOnEdit }) => {
     return sorted;
   };
 
-  // Função para alternar a direção da ordenação
   const toggleSortDirection = (field) => {
     if (sortBy === field) {
       setSortDirection(sortDirection === "asc" ? "desc" : "asc");
@@ -177,9 +171,9 @@ const Grid = ({ produtos, setProdutos, setOnEdit }) => {
   return (
     <>
       <SearchBar
-        value={searchTerm} // Estado atual da busca
-        onChange={setSearchTerm} // Atualiza o termo de busca
-        onClear={() => setSearchTerm("")} // Função para limpar a busca
+        value={searchTerm} 
+        onChange={setSearchTerm} 
+        onClear={() => setSearchTerm("")} 
       />
 
       <Table>
@@ -230,7 +224,6 @@ const Grid = ({ produtos, setProdutos, setOnEdit }) => {
         </Tbody>
       </Table>
 
-      {/* Modal de confirmação */}
       <ModalOverlay show={showModal}>
         <ModalContent>
           <h3>Tem certeza de que deseja excluir este produto?</h3>

@@ -3,13 +3,12 @@ import styled from "styled-components";
 import Dropdown from "../components/Dropdown";
 import SearchBar from "../components/SearchBar";
 
-// Estilização para a barra de navegação
 const Navbar = styled.nav`
   width: 90vw;
   position: relative;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #4c4b72; // Cor mais suave
+  background-color: #4c4b72; 
   padding: 30px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
   text-align: left;
@@ -29,8 +28,8 @@ const Table = styled.table`
   max-width: 1120px;
   margin: 20px auto;
   word-break: break-all;
-  table-layout: fixed; // Garante que as colunas fiquem alinhadas
-  border-collapse: collapse; // Elimina as bordas duplas
+  table-layout: fixed; 
+  border-collapse: collapse; 
 `;
 
 export const Thead = styled.thead``;
@@ -64,8 +63,8 @@ export const Td = styled.td`
 
 const Entradas = ({ produtos = [] }) => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [sortBy, setSortBy] = useState(""); // Estado para determinar a coluna a ser ordenada
-  const [sortDirection, setSortDirection] = useState("asc"); // Estado para controlar a direção da ordenação (ascendente ou descendente)
+  const [sortBy, setSortBy] = useState(""); 
+  const [sortDirection, setSortDirection] = useState("asc"); 
 
   const normalizeString = (str) => (str ? String(str).toLowerCase() : "");
 
@@ -73,7 +72,7 @@ const Entradas = ({ produtos = [] }) => {
     return normalizeString(produto.nome).includes(normalizeString(searchTerm));
   });
 
-  // Função para ordenar os produtos
+  
   const sortProdutos = (field) => {
     const sorted = [...filteredProdutos].sort((a, b) => {
       if (field === "nome") {
@@ -92,7 +91,7 @@ const Entradas = ({ produtos = [] }) => {
     return sorted;
   };
 
-  // Função para alternar a direção da ordenação
+  
   const toggleSortDirection = (field) => {
     if (sortBy === field) {
       setSortDirection(sortDirection === "asc" ? "desc" : "asc");
@@ -102,7 +101,7 @@ const Entradas = ({ produtos = [] }) => {
     }
   };
 
-  // Função para limpar a busca
+  
   const clearSearch = () => setSearchTerm("");
 
   const handleLogout = () => {

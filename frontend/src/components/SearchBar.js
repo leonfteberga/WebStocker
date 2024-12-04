@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-// Estilos para o contêiner do campo de busca e botão
 const SearchContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -13,19 +12,19 @@ const SearchContainer = styled.div`
 
 const SearchInput = styled.input`
   padding: 10px;
-  width: 80%; /* Define metade da largura do contêiner */
+  width: 80%; 
   border: 1px solid #ccc;
-  border-radius: 5px 0 0 5px; /* Define bordas arredondadas no lado esquerdo */
+  border-radius: 5px 0 0 5px; 
   margin-right: 10px;
 `;
 
 const ClearButton = styled.button`
   padding: 10px;
-  width: 10%; /* Define metade da largura do contêiner */
+  width: 10%; 
   border: none;
   background-color: #ff4d4d;
   color: white;
-  border-radius: 0 5px 5px 0; /* Define bordas arredondadas no lado direito */
+  border-radius: 0 5px 5px 0; 
   cursor: pointer;
 
   &:hover {

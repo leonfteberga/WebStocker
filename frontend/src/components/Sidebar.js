@@ -4,7 +4,6 @@ import { FaThLarge, FaBoxOpen, FaArrowRight, FaArrowLeft, FaBars } from "react-i
 import styled from "styled-components";
 import logo from "../img/Logo.png";
 
-// Estilização com styled-components
 const SidebarContainer = styled.div`
   width: ${(props) => (props.collapsed ? "80px" : "250px")};
   height: 95.6vh;

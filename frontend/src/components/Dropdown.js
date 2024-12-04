@@ -52,7 +52,7 @@ const Dropdown = ({ onLogout }) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
 
-  // Verificar a role do usuário ao carregar o componente
+
   useEffect(() => {
     const role = localStorage.getItem("role");
     if (role === "admin") {
@@ -65,7 +65,7 @@ const Dropdown = ({ onLogout }) => {
   };
 
   const handleGoToRegister = () => {
-    navigate("/register"); // Redireciona para a página de registro
+    navigate("/register"); 
   };
 
   return (
@@ -74,7 +74,6 @@ const Dropdown = ({ onLogout }) => {
         <FaUser />
       </DropdownButton>
       <DropdownMenu isOpen={isDropdownOpen}>
-        {/* Exibir botão de registro apenas para administradores */}
         {isAdmin && (
           <DropdownItem onClick={handleGoToRegister}>
             <FaUserPlus style={{ marginRight: "8px" }} />

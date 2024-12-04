@@ -4,13 +4,12 @@ import axios from "axios";
 import Dropdown from "../components/Dropdown";
 import SearchBar from "../components/SearchBar";
 
-// Estilização para a barra de navegação
 const Navbar = styled.nav`
   width: 90vw;
   position: relative;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #4c4b72; // Cor mais suave
+  background-color: #4c4b72; 
   padding: 30px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
   text-align: left;
@@ -30,8 +29,8 @@ const Table = styled.table`
   max-width: 1120px;
   margin: 20px auto;
   word-break: break-all;
-  table-layout: fixed; // Garante que as colunas fiquem alinhadas
-  border-collapse: collapse; // Elimina as bordas duplas
+  table-layout: fixed; 
+  border-collapse: collapse; 
 `;
 
 export const Thead = styled.thead``;
@@ -67,8 +66,8 @@ const Saidas = () => {
   const [exclusoes, setExclusoes] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
-  const [sortBy, setSortBy] = useState(""); // Estado para coluna de ordenação
-  const [sortDirection, setSortDirection] = useState("asc"); // Estado para direção da ordenação
+  const [sortBy, setSortBy] = useState(""); 
+  const [sortDirection, setSortDirection] = useState("asc"); 
 
   const fetchExclusoes = async () => {
     try {
@@ -95,7 +94,6 @@ const Saidas = () => {
     );
   });
 
-  // Função para ordenar as exclusões
   const sortExclusoes = (field) => {
     const sorted = [...filteredExclusoes].sort((a, b) => {
       if (field === "nome_produto") {
@@ -112,7 +110,7 @@ const Saidas = () => {
     return sorted;
   };
 
-  // Função para alternar a direção da ordenação
+
   const toggleSortDirection = (field) => {
     if (sortBy === field) {
       setSortDirection(sortDirection === "asc" ? "desc" : "asc");
@@ -122,7 +120,6 @@ const Saidas = () => {
     }
   };
 
-  // Função para limpar a busca
   const clearSearch = () => setSearchTerm("");
 
   const handleLogout = () => {
